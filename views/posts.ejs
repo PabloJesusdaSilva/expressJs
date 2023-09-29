@@ -6,8 +6,29 @@
 <body>
    <%- include("partials/header.ejs") %>
    
-   <h1>Home</h1>
+   <section class="container">
+      <article class="content">
+         <h1>Posts</h1>
 
+         <div class="posts">
+            <% posts.forEach(item => { %>
+               <div class="post">
+                  <h3><% item.title %></h3>
+                  <p>
+                     <% item.content %>
+                  </p>  
+
+                  <% if(item.stars) { %>
+                     <% for(let i = 0; item.stars; i++) { %>
+                        <img src="#" alt="foto de uma estrela de classificação">
+                     <% } %>
+                  <% } %>
+               </div>
+            <% }) %>
+         </div>
+      </article>
+   </section>
+      
    <%- include("partials/footer.ejs") %>
    <script src="/js/main.js"></script>
 </body>

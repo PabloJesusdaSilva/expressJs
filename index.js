@@ -15,11 +15,31 @@ app.use(express.static(path.join(__dirname, "public")));
 // MVC - Model View Controler
 
 app.get("/", (req, res) => {
-   res.render("index");
+   res.render("index", {
+      title: "Digital House - Home"
+   });
 })
 
 app.get("/posts", (req, res) => {
-   res.render("posts")
+   res.render("posts", {
+      title: "Digitaç House - Posts",
+      posts: [
+         {
+            title: "Novidades no mundom da tecnologia",
+            content: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis exercitationem expedita aspernatur sequi consectetur minima facere.",
+            stars: 2
+         },
+         {
+            title: "Criando servidor com Node.JS",
+            content: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis exercitationem expedita aspernatur sequi consectetur minima facere."
+         },
+         {
+            title: "Novas features do Next.Js 13",
+            content: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis exercitationem expedita aspernatur sequi consectetur minima facere.",
+            stars: 5
+         }
+      ]
+   })
 })
 
 // 404 error (page nout found)
