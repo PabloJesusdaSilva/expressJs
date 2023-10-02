@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <%- include("partials/head.ejs") %>
+</head>
+<body>
+   <%- include("partials/header.ejs") %>
+   
+   <section class="container">
+      <article class="content">
+         <h1>Posts</h1>
+
+         <form class="create-post" action="/save-post" method="post">
+            <div>
+               <label>Title</label>
+               <input type="text" name="title">
+            </div>
+
+            <div>
+               <label>Text</label>
+               <textarea name="text" cols="30" rows="10"></textarea>
+            </div>
+
+            <button type="submit">Enviar</button>
+         </form>
+      </article>
+   </section>
+      
+   <%- include("partials/footer.ejs") %>
+   <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 const express = require("express");
 const path =  require("path");
+const fs = require("fs");
 const app = express();
 
 // defining engine template
@@ -11,6 +12,9 @@ app.set("view engine", "ejs");
 
 // defining public files
 app.use(express.static(path.join(__dirname, "public")));
+
+// habilita server para receber dados via post (formulário)
+app.use(express.urlencoded({ extended: true }))
 
 // MVC - Model View Controler
 
@@ -39,7 +43,33 @@ app.get("/posts", (req, res) => {
             stars: 5
          }
       ]
+   });
+})
+
+app.get("/create-post", (req, res) => {
+   const { c } = req.query;
+
+   res.render("create-post", {
+      title: "Digital House - Criar Post",
+      registered: c
+   });
+})
+
+app.post("/save-post", (req, res) => {
+   const { title, text } = req.body;
+
+   const data = fs.readFileSync("./store/posts.json");
+   const posts = JSON.parse(data);
+
+   posts.push({
+      title,
+      text
    })
+
+   const postsString = JSON.stringify(posts);
+   fs.writeFileSync("./store/posts.json", postsString);
+
+   res.redirect('/create-post?c=1');
 })
 
 // 404 error (page nout found)
